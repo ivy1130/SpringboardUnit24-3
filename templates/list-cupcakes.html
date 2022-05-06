@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Cupcakes{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h4 class="display-4 text-center">All Cupcakes</h4>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <ul class="list-group mx-auto" id="cupcake-list"></ul>
+            <h5 class="display-5 text-center">Add Cupcake Form</h5>
+            <form id="add-cupcake-form" method="POST">
+                {{ form.hidden_tag() }}
+
+                {% for field in form if field.widget.input_type != 'hidden'%}
+                <div class="form-group">
+                {{field.label}}
+                {{field(class_="form-control")}}
+                {% for err in field.errors %}
+                <small class="form-text text-danger">
+                    {{err}}
+                </small>
+                {% endfor %}
+                </div>
+                {% endfor %}
+                <button class="btn btn-success">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %} 

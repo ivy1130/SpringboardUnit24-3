@@ -4,7 +4,7 @@ from flask import Flask, request, render_template,  redirect, flash, session, js
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, Cupcake
 
-# from forms import 
+from forms import AddCupcakeForm
 
 app = Flask(__name__)
 # app.debug=True
@@ -65,3 +65,13 @@ def delete_cupcate(cupcake_id):
     db.session.delete(cupcake)
     db.session.commit()
     return jsonify(message=f"deleted {cupcake}")
+
+# *****************************
+# CUPCAKES FRONTEND
+# *****************************
+
+@app.route('/')
+def show_cupcakes():
+    form = AddCupcakeForm()
+
+    return render_template('list-cupcakes.html', form=form)
